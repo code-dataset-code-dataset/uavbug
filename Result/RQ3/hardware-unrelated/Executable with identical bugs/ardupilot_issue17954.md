@@ -1,0 +1,57 @@
+Here’s the output for your provided markdown document about the Ardupilot bug report:
+
+---
+
+### **Environment where the bug occurred:**
+
+- **Hardware environment:** SITL (Software in the Loop Simulation)
+- **Software environment:** Ardupilot (exact commit version not mentioned)
+- **Report Author:** rmackay9
+- **Report Time:** Jul 07, 2021
+- **Ardupilot commit version:** Not mentioned
+- **last commit before the reporting time:** 2ba6ae6
+
+---
+
+### **Steps for bug reproduction:**
+
+- **Step 1:** Start SITL.  
+- **Step 2:** Set mode to `GUIDED` mode.  
+- **Step 3:** Arm throttle.  
+- **Step 4:** Execute `attitude 1 0 0 0 0.6` and repeat multiple times to take off using the attitude controller.  
+- **Step 5:** Execute `attitude 1 0 0 0 0.4` and repeat multiple times to land using the attitude controller.  
+- **Step 6:** Execute `velocity 0 0 -1` to attempt takeoff using the velocity controller.  
+
+---
+
+### **Observed behavior by the user:**
+
+- **Behavior after step 1:** SITL started successfully.  
+- **Behavior after step 2:** The `GUIDED` mode was enabled.  
+- **Behavior after step 3:** Throttle armed successfully.  
+- **Behavior after step 4:** The drone took off using the attitude controller.  
+- **Behavior after step 5:** The drone landed using the attitude controller.  
+- **Behavior after step 6:** Internal Error 1048576 was triggered in SITL, likely due to the position controller not being re-initialized before the velocity controller tried to use it.
+
+---
+
+### **Expected behavior:**
+
+- **Expected behavior 1:** No internal error should occur.  
+- **Expected behavior 2:** The velocity controller should operate as expected after switching from the attitude controller.  
+
+---
+
+### **Additional information provided by the user for bug investigation:**
+
+- **Actions taken by the user:** Provided detailed steps to reproduce the issue in SITL and described the probable cause.  
+- **URL of the flight log provided by the user:** Not mentioned.  
+
+---
+
+### **Communication between developers or other personnel and the user:**
+
+- **Suggestion 1 provided by developers or other personnel:** Issue was addressed by commit `#17539`.  
+- **Result of the operation after the user adopted suggestion 1:** Bug was fixed and the fix was included in beta6.  
+
+--- 

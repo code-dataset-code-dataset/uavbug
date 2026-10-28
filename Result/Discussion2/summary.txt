@@ -1,0 +1,28 @@
+PX4-Autopilot & 21588    & The CMake step in the report shows no errors, but the subsequent make step (linked in the report) fails.                          
+PX4-Autopilot & 21062    & A specific setting mentioned in the report (binding the right-click to clipboard) is absent, yet the VS Code settings file remains intact.                    
+PX4-Autopilot & 20826    & The error is not ``[Err] [MulticopterMotorModel.cc:253] Please specify a robotNamespace...'' but a service call timeout.        
+PX4-Autopilot & 20374    & The system does not hang on ``waiting for ports'' but reports Preflight Fail: heading estimate not stable.            
+PX4-Autopilot & 19969    & The return value is different.                                                       
+PX4-Autopilot & 19770    & The error message is not ``Preflight Fail: height estimate not stable'', but ``magnetometer 2 error'' and ``pre-arm check error''. These errors persist after waiting but disappear when unplugging the GPS. 
+PX4-Autopilot & 19665    & The issue is not ``Tx queue overflow error'' but failure to locate iris-hitl, with the system stuck on ``Loading hitl-iris.world...''.        
+PX4-Autopilot & 16230    & The buzzer does not activate, but no IO errors are reported.                                                            
+PX4-Autopilot & 16129    & No fix\_type parameter found in MAVLink Inspector.                                                                                                            
+PX4-Autopilot & 15211    & After disabling GPS, the rover does not rotate but enters a poll timeout state, making diagnostics impossible. QGC shows it moving in a straight line.             
+PX4-Autopilot & 14903    & Post-execution takeoff altitude exceeds 2.5 meters (not less than 2.5m as claimed).                                                                                                               
+PX4-Autopilot & 14189    & The real-time factor starts at 5.89 immediately, rather than degrading from 16 to 5 over 10 minutes.                                                                                       
+PX4-Autopilot & 14150    & Inconsistent errors post-report steps: an ASCII decoding error (0xe6) occurs until the file is manually fixed, after which the reported bug manifests.             
+PX4-Autopilot & 13374    & The system fails to hold position at designated waypoints.                                                                                                                                    
+PX4-Autopilot & 13001    & JMavSim GUI does not display, preventing visibility of bug-related prompts.                                                                                                                 
+PX4-Autopilot & 12471    & The drone does not auto-disarm despite failing to take off.                                                                                                                                           
+PX4-Autopilot & 12338    & After modifying specified values, actuator controls in logs do not exceed 1.     
+PX4-Autopilot & 12241    & Command execution fails due to unknown parameter -j8, not temporary command rejection.     
+PX4-Autopilot & 11942    & The error message in the report is the conversion error from uint8 to uint16. When reproducing, it is because robotcontrol.h is missing.                         
+PX4-Autopilot & 10296    & Disabling joystick control causes the drone to yaw without aligning to start/end points.                                                                                           
+PX4-Autopilot & 9554     & The final compilation command throws geo.h not found instead of the reported ecl.h error.                                          
+PX4-Autopilot & 9513     & Step 3 triggers an error message but allows continuation, while Step 4 breaks drone control (no real-time factor error).              
+autopilot & 17952    & The drone did not climb to a very high altitude; but continuously decreased its altitude, and even showed a negative value on the console.
+autopilot & 17834    & After the step 7, the drone did not enter landing mode and stopped climbing after ascending 1.5 meters.
+autopilot & 14353    & Even with the origin set, the drone still does not appear on the map after the step 2.
+autopilot & 13046    & The drone returned home ignoring the rally point, and its altitude was not abnormal.
+autopilot & 10295    & In the most recent commit related to this issue, the command in step 2 fails to run.
+

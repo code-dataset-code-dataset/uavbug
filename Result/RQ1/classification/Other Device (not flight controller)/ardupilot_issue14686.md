@@ -1,0 +1,35 @@
+### **Environment where the bug occurred:**
+- **Hardware environment:** UAVCAN GPS/compass unit like Here+
+- **Software environment:** Ardupilot 4.0.4 (?)
+- **Report Author:** `rmackay9`
+- **Report time:** June 25, 2020
+- **Ardupilot commit version:** Not mentioned  
+- **last commit before the reporting time:** fd96cdf
+
+### **Steps for bug reproduction:**
+- **Step 1:** Enable UAVCAN.
+- **Step 2:** Set `CAN_P1_DRIVER = 1`.
+- **Step 3:** Set `GPS_TYPE = 9`.
+- **Step 4:** Connect a UAVCAN GPS/compass unit like the Here+ to the autopilot and reboot it.
+- **Step 5:** Disconnect the UAVCAN GPS/compass unit and reboot the autopilot.
+
+### **Observed behavior by the user:**
+- **Behavior after step 1:** N/A
+- **Behavior after step 2:** N/A
+- **Behavior after step 3:** N/A
+- **Behavior after step 4:** N/A
+- **Behavior after step 5:** A pre-arm failure message, "PreArm: Compass 2 not Found," appears (repeated twice) and cannot be resolved without directly modifying the parameter list.
+
+### **Expected behavior:**
+- **Expected behavior 1:** The autopilot should not display the pre-arm failure message after the removal of the UAVCAN GPS/compass unit.
+- **Expected behavior 2:** The system should handle the removal properly without requiring manual parameter modifications.
+
+### **Additional information provided by the user for bug investigation:**
+- **Actions taken by the user:** The user identified changing the `COMPASS_PRIO3_ID` parameter to `0` as a workaround.
+- **URL of the flight log provided by the user:** Not mentioned.
+
+### **Communication between developers or other personnel and the user:**
+- **Suggestion 1 provided by developers or other personnel:** The user (`rmackay9`) suggested setting `COMPASS_PRIO3_ID` to `0` as a workaround for the issue.
+- **Result of the operation after the user adopted suggestion 1:** Manual mitigation of the issue by modifying parameters.
+- **Suggestion 2 provided by developers or other personnel:** The user (`rmackay9`) noted that a fix for the issue seemed to be included in Ardupilot version 4.0.4.
+- **Result of the operation after the user adopted suggestion 2:** The user marked the issue as resolved and closed it on November 18, 2020.

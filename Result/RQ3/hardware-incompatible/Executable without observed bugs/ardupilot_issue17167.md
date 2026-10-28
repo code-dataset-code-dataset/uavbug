@@ -1,0 +1,49 @@
+**Environment where the bug occurred:**
+
+- **Hardware environment:** KakuteF7mini (reported to happen on any device)
+- **Software environment:** SITL (native and WSL Ubuntu 18.04)
+- **Report Author:** tatsuy
+- **Report Time:** Apr 13, 2021
+- **Ardupilot commit version:** not mentioned
+- **last commit before the reporting time:** 193ee8d
+
+**Steps for bug reproduction:**
+
+- **Step 1:** Run SITL.
+- **Step 2:** Set the parameter `EK3_DRAG_BCOEF_Y` to 50 using the command `param set EK3_DRAG_BCOEF_Y 50`.
+- **Step 3:** Reboot SITL.
+- **Step 4:** Check the parameter value using the command `param show EK3_DRAG_BCOEF_Y`.
+
+**Observed behavior by the user:**
+
+- **Behavior after step 4:** The parameter `EK3_DRAG_BCOEF_Y` is reset to its default value (`0.000000`).<font color='red'>使用最近提交发现，该参数被正确设置为50</font>
+
+**Expected behavior:**
+
+- **Expected behavior 1:** The `EK3_DRAG_BCOEF_Y` parameter should retain the value set by the user after rebooting.
+
+**Additional information provided by the user for bug investigation:**
+
+- **Actions taken by the user:**
+  - Deleted `eeprom.bin`, which did not change anything.
+  - Checked other `EK3_DRAG_*` parameters, which retained their values after reboot.
+  - Changed the index of `DRAG_BCOEF_Y` from 3 to 7, and this resolved the issue. 
+    ```cpp
+    AP_GROUPINFO("DRAG_BCOEF_Y", 7, NavEKF3, _ballisticCoef_y, 0.0f),
+    ```
+  - To investigate further, changed the index of another parameter (`DRAG_M_NSE`) from 4 to 3, and observed the same reset-to-default behavior:
+    ```cpp
+    AP_GROUPINFO("DRAG_M_NSE", 4, NavEKF3, _dragObsNoise, 0.5f),
+    ```
+- **URL of the flight log provided by the user:** Not mentioned.
+
+**Communication between developers or other personnel and the user:**
+
+- **Suggestion 1 provided by developers or other personnel:** Developer `rmackay9` confirmed the issue in SITL and added it to the Copter-4.1 issues list.
+- **Result of the operation after the user adopted suggestion 1:** User `tatsuy` updated the description of the issue.
+
+- **Suggestion 2 provided by developers or other personnel:** Developer `priseborough` suggested moving `EK3_DRAG_BCOEF_Y` to slot 7 as a fix, but indicated it pointed to a deeper issue in the param system.
+- **Result of the operation after the user adopted suggestion 2:** This resolved the issue.
+
+- **Suggestion 3 provided by developers or other personnel:** Developer `tridge` confirmed the issue was fixed in PR `#17228`.
+- **Result of the operation after the user adopted suggestion 3:** User `tatsuy` expressed gratitude for the resolution.

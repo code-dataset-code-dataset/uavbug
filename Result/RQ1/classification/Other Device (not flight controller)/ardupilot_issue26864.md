@@ -1,0 +1,39 @@
+**Environment where the bug occurred:**
+
+- **Hardware environment:** Autopilot running Copter-4.5 (or higher).
+- **Software environment:** Ardupilot flight control software.
+- **Report Author:** rmackay9
+- **Report Time:** Apr 22, 2024
+- **Ardupilot commit version:** Not mentioned
+- **last commit before the reporting time:** 0eded27
+
+**Steps for bug reproduction:**
+
+- **Step 1:** Upload Copter-4.5 (or higher) to an autopilot.
+- **Step 2:** Set `DISARM_DELAY` to 0 to disable automatic disarming while landed.
+- **Step 3:** Switch vehicle to Stabilize mode.
+- **Step 4:** Arm the vehicle.
+- **Step 5:** Raise throttle to 100%.
+- **Step 6:** Turn autopilot upside down.
+
+**Observed behavior by the user:**
+
+- **Behavior after step 1:** N/A
+- **Behavior after step 2:** N/A
+- **Behavior after step 3:** Vehicle switched to Stabilize mode successfully.
+- **Behavior after step 4:** Vehicle armed successfully.
+- **Behavior after step 5:** Throttle raised to maximum.
+- **Behavior after step 6:** "Internal Error 0x100000" appears on the Ground Control Station's (GCS) messages tab.
+
+**Expected behavior:**
+
+- **Expected behavior 1:** The system should not report internal errors despite unusual inputs or conditions.
+
+**Additional information provided by the user for bug investigation:**
+- **Actions taken by the user:** User included relevant code locations in `land_detector.cpp` and `mode_stabilize.cpp` and referred to discussions about the issue in the Copter-4.5 support forums.
+- **URL of the flight log provided by the user:** Not explicitly mentioned.
+
+**Communication between developers or other personnel and the user:**
+
+- **Suggestion 1 provided by developers or other personnel:** N/A
+- **Result of the operation after the user adopted suggestion 1:** N/A

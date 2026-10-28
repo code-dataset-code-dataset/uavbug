@@ -1,0 +1,46 @@
+Here is the extracted information for the provided ArduPilot bug report:
+
+---
+
+**Environment where the bug occurred:**
+
+- **Hardware environment:** Not mentioned  
+- **Software environment:** Ardupilot with commit version not mentioned  
+- **Report Author:** rmackay9  
+- **Report Time:** Dec 13, 2019  
+- **Ardupilot commit version:** Not mentioned  
+- **last commit before the reporting time:** 9997cbf
+
+**Steps for bug reproduction:**
+
+- **Step 1:** Set `RALLY_INCL_HOME` to `0` (to make the vehicle fly to the rally point instead of going home).  
+- **Step 2:** Set `RALLY_LIMIT_KM` to `2` (to allow a rally point to be placed more than 300m away).  
+- **Step 3:** Create a rally point with altitude set to the location's terrain altitude.  
+- **Step 4:** Enter `LOITER`, arm throttle, and set `rc 3` to `1100`.  
+- **Step 5:** Switch to `RTL`.  
+
+**Observed behavior by the user:**
+
+- **Behavior after step 1:** N/A  
+- **Behavior after step 2:** N/A  
+- **Behavior after step 3:** N/A  
+- **Behavior after step 4:** N/A  
+- **Behavior after step 5:** The vehicle climbs very high before moving to the rally point. <font color='red'>即使设置RALLY_INCL_HOME为0，也会无视rally point回到home，且高度上无异常</font> 
+
+**Expected behavior:**
+
+- **Expected behavior 1:** The vehicle should climb to an appropriate RTL altitude and move to the rally point as expected.  
+
+**Additional information provided by the user for bug investigation:**
+
+- **Actions taken by the user:** Tested rally points and reviewed the setup. Suspected an issue with rally point altitudes being interpreted as absolute instead of relative to home.  
+- **URL of the flight log provided by the user:** Not mentioned  
+
+**Communication between developers or other personnel and the user:**
+
+- **Suggestion 1 provided by developers or other personnel:** Through a discussion with developer `@peterbarker`, it was clarified that Rally point altitudes are relative to home.  
+- **Result of the operation after the user adopted suggestion 1:** User `rmackay9` acknowledged that the rally point was set incorrectly and closed the issue after referring to the [documentation on Rally Points](https://ardupilot.org/copter/docs/common-rally-points.html).  
+
+---
+
+This concludes the extracted information.

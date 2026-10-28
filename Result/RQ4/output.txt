@@ -1,0 +1,94 @@
+Can the Program Run?
+Assignees
+  Spearman p-value: 0.46032849084346406
+  Spearman corr: 0.045807779975286754
+Participants
+  Spearman p-value: 0.9932316890854757
+  Spearman corr: 0.0005265945177142928
+Comments(Include report)
+  Spearman p-value: 0.2720313781358612
+  Spearman corr: -0.06810599123196731
+Closed Time
+  Spearman p-value: 0.2357172027396538
+  Spearman corr: -0.0735088134531017
+Author Followers
+  Spearman p-value: 0.0005598394037236083
+  Spearman corr: 0.21175409925441077
+Author Repositories
+  Spearman p-value: 0.0018887829083023906
+  Spearman corr: 0.19110401733142107
+Author Stars
+  Spearman p-value: 6.226737869960609e-05
+  Spearman corr: 0.2447681487078437
+Author Registration time
+  Spearman p-value: 0.9315612231831777
+  Spearman corr: 0.005331183123516441
+Total Contributions
+  Spearman p-value: 0.0020219051206292068
+  Spearman corr: 0.19024525865799724
+Total Contributions Before the Issue
+  Spearman p-value: 0.0009169134513978375
+  Spearman corr: 0.20400145694124067
+Contributions Within 1 Year Before Submitting the Issue
+  Spearman p-value: 0.03236617193732984
+  Spearman corr: 0.13250535863126597
+Contributions Before Submitting the Issue In the Repository
+  Spearman p-value: 0.0004612378093628078
+  Spearman corr: 0.2148682961233175
+Total Contributions In the Repository
+  Spearman p-value: 0.000623533484723404
+  Spearman corr: 0.2100026791202694
+Previous Frequency(all)
+  Spearman p-value: 0.01884446586429223
+  Spearman corr: 0.1450221403458018
+Previous Frequency(Same Hardware)
+  Spearman p-value: 0.7372287909292201
+  Spearman corr: 0.031766991440801286
+
+
+Is the Bug Reproduced?
+Assignees
+  Spearman p-value: 0.3329318225712613
+  Spearman corr: -0.06005029454996407
+Participants
+  Spearman p-value: 0.25471562886150106
+  Spearman corr: -0.07061557901189061
+Comments(Include report)
+  Spearman p-value: 0.1303550859789197
+  Spearman corr: -0.09369741652425446
+Closed Time
+  Spearman p-value: 0.5898548362982008
+  Spearman corr: -0.03345303057104238
+Author Followers
+  Spearman p-value: 0.00011772233295941932
+  Spearman corr: 0.2356717885218165
+Author Repositories
+  Spearman p-value: 0.0057732643195955845
+  Spearman corr: 0.1701060941431338
+Author Stars
+  Spearman p-value: 0.00015720310266682588
+  Spearman corr: 0.23142147987600095
+Author Registration time
+  Spearman p-value: 0.32846238174777276
+  Spearman corr: 0.0606068616012852
+Total Contributions
+  Spearman p-value: 0.00820960870480395
+  Spearman corr: 0.16330178352359428
+Total Contributions Before the Issue
+  Spearman p-value: 0.0008833167185867858
+  Spearman corr: 0.20462918546343056
+Contributions Within 1 Year Before Submitting the Issue
+  Spearman p-value: 0.034449541024863445
+  Spearman corr: 0.13096528640421276
+Contributions Before Submitting the Issue In the Repository
+  Spearman p-value: 2.194325158768972e-05
+  Spearman corr: 0.2589557308804283
+Total Contributions In the Repository
+  Spearman p-value: 0.00020874482446536682
+  Spearman corr: 0.22717652641015548
+Previous Frequency(all)
+  Spearman p-value: 0.0006735956916502099
+  Spearman corr: 0.2087386884090233
+Previous Frequency(Same Hardware)
+  Spearman p-value: 0.8942717564673892
+  Spearman corr: -0.01258551779338827

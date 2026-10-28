@@ -1,0 +1,46 @@
+**Environment where the bug occurred:**
+
+- **Hardware environment:** Not explicitly mentioned.
+- **Software environment:** Ardupilot stable 4.2 release.
+- **Report Author:** rmackay9
+- **Report Time:** Aug 19, 2022
+- **Ardupilot commit version:** Not mentioned.
+- **last commit before the reporting time:** 95370ce
+
+**Steps for bug reproduction:**
+
+- **Step 1:** Start SITL Copter.
+- **Step 2:** Execute the command `param load ../Tools/autotest/default/copter-rangefinder.parm`.
+- **Step 3:** Restart SITL and execute Step 2 again.
+- **Step 4:** Create an Auto mission with a TAKEOFF command with an altitude (Alt) of at least 50m and a Frame of AGL (aka "terrain").
+- **Step 5:** Set `param set AUTO_OPTIONS 3` (for convenience, to allow arming and taking off in Auto mode).
+- **Step 6:** Execute `auto`.
+- **Step 7:** Arm the throttle.<font color='red'>正常爬升</font>
+
+**Observed behavior by the user:**
+
+- **Behavior after step 1:** N/A.
+- **Behavior after step 2:** N/A.
+- **Behavior after step 3:** N/A.
+- **Behavior after step 4:** N/A.
+- **Behavior after step 5:** N/A.
+- **Behavior after step 6:** N/A.
+- **Behavior after step 7:** All is well until the vehicle climbs above the rangefinder's range (40m). At this point, it displays the message "auto takeoff: failed to get terrain offset." However, the drone continues climbing until the pilot retakes control in another mode.
+
+**Expected behavior:**
+
+- **Expected behavior 1:** The takeoff controller should handle the absence of terrain altitude gracefully.
+- **Expected behavior 2:** A terrain failsafe should trigger to prevent the drone from climbing uncontrollably if the terrain data becomes unavailable.
+
+**Additional information provided by the user for bug investigation:**
+
+- **Actions taken by the user:** Observed and described steps that consistently simulate the bug. Suggested that a terrain failsafe should be implemented for instances when the vehicle is not landed.
+- **URL of the flight log provided by the user:** Not mentioned.
+
+**Communication between developers or other personnel and the user:**
+
+- **Suggestion 1 provided by developers or other personnel:** Developer `peterbarker` questioned why mission-terrain pre-arm checks did not catch the issue and highlighted that the vehicle should not have been allowed to arm in the described circumstances.
+- **Result of the operation after the user adopted suggestion 1:** User `rmackay9` responded, explaining that terrain failsafes can only occur once the vehicle is armed and navigating waypoints. He noted that the error happens specifically when terrain altitude is initially available as takeoff begins but is later lost.
+  
+- **Suggestion 2 provided by developers or other personnel:** Developer `peterbarker` mentioned the pre-arm checks only consider waypoint items and not takeoff commands. He referenced related code in the `TerrainMission.cpp` file.
+- **Result of the operation after the user adopted suggestion 2:** User `rmackay9` confirmed that the issue was resolved after creating and merging a pull request linked to the discussion, and the issue was subsequently closed.  

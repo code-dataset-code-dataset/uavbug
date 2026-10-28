@@ -1,0 +1,43 @@
+**Environment where the bug occurred:**
+
+- **Hardware environment:** Not mentioned  
+- **Software environment:** Ardupilot, SITL simulator  
+- **Report Author:** rmackay9  
+- **Report Time:** May 15, 2023  
+- **Ardupilot commit version:** Not mentioned  
+- **last commit before the reporting time:** 6443eab
+
+**Steps for bug reproduction:**
+
+- **Step 1:** Set parameter `WP_YAW_BEHAVIOR` to 0.  
+- **Step 2:** Set parameter `AUTO_OPTIONS` to 7 (1: Allow arming, 2: Allow takeoff without raising throttle, 4: Ignore pilot yaw).  
+- **Step 3:** Input a square mission into the flight control software.  
+- **Step 4:** Arm and fly the mission.  
+- **Step 5:** Download the logs and check the `ATT.DesYaw` values during the flight.  
+
+**Observed behavior by the user:**
+
+- **Behavior after step 1:** N/A  
+- **Behavior after step 2:** N/A  
+- **Behavior after step 3:** N/A  
+- **Behavior after step 4:** The vehicle's heading changed slightly, especially when rounding waypoints, despite `WP_YAW_BEHAVIOR` being set to 0.  
+- **Behavior after step 5:** The downloaded logs show slight changes in `ATT.DesYaw` during the flight. <font color='red'>ATT.DesYaw有从354逐步变为340的过程</font> 
+
+**Expected behavior:**  
+
+- **Expected behavior 1:** The vehicle's heading should remain constant (should not change) when `WP_YAW_BEHAVIOR` is set to 0.
+
+**Additional information provided by the user for bug investigation:**
+
+- **Actions taken by the user:**  
+  - Shared steps to reproduce the bug.  
+  - Checked the logs for `ATT.DesYaw` changes during the flight.  
+  - Reported discussion with `lthall`, who included an enhancement to resolve the issue in the Copter ship landing feature.  
+
+- **URL of the flight log provided by the user:** Not mentioned  
+
+**Communication between developers or other personnel and the user:**
+
+- **Suggestion 1 provided by developers or other personnel:** Discussed with `lthall`, who included an enhancement in the Copter ship landing feature to resolve the issue.  
+- **Result of the operation after the user adopted suggestion 1:** No further drift observed in `ATT.DesYaw` as of Copter version 4.7.  
+

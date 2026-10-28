@@ -1,0 +1,41 @@
+### Extracted Information:
+
+**Environment where the bug occurred:**
+
+- **Hardware environment:** Not explicitly mentioned (assumed SITL as per reproduction steps).
+- **Software environment:** Ardupilot Copter software (commit version not mentioned).
+- **Report Author:** rmackay9
+- **Report Time:** Sep 08, 2020
+- **Ardupilot Commit Version:** Not mentioned
+- **last commit before the reporting time:** bc21e50
+
+**Steps for bug reproduction:**
+
+- **Step 1:** Start SITL (Software In The Loop simulation).
+- **Step 2:** Set `FENCE_ENABLE` to 1.
+- **Step 3:** Create a small square Auto mission.
+- **Step 4:** Arm the vehicle in Loiter, switch to Auto, and raise the throttle to begin the mission.
+- **Step 5:** After the vehicle has completed the takeoff and is heading toward the first waypoint, execute the `DO_REPOSITION` command with a position outside the fence.
+
+**Observed behavior by the user:**
+
+- **Behavior after step 1:** Simulation environment starts.
+- **Behavior after step 2:** Fence is enabled.
+- **Behavior after step 3:** Auto mission created.
+- **Behavior after step 4:** The vehicle starts executing the mission, taking off and heading toward the first waypoint.
+- **Behavior after step 5:** The `DO_REPOSITION` command gets rejected, but the vehicle behaves incorrectly by suddenly skipping forward to the next waypoint.
+
+**Expected behavior:**
+
+- **Expected behavior 1:** The `DO_REPOSITION` command should fail gracefully without affecting the vehicle's state.
+- **Expected behavior 2:** The vehicle should not skip waypoints and should continue as per the Auto mission without interference.
+
+**Additional information provided by the user for bug investigation:**
+
+- **Actions taken by the user:** Steps provided to reproduce the issue in SITL.
+- **URL of the flight log provided by the user:** Not provided.
+
+**Communication between developers or other personnel and the user:**
+
+- In the report, the user mentioned that the issue likely originated from PR #14720, which added support for the `DO_REPOSITION` command.
+- No additional communication or suggestions between developers and the user were noted.

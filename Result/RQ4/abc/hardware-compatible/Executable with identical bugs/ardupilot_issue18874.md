@@ -1,0 +1,75 @@
+Here’s the extracted output for the bug report regarding "compassmot stops mavlink telemetry":
+
+---
+
+### **Environment where the bug occurred:**
+
+- **Hardware environment:**  
+  1. Pixhawk4  
+  2. CUAV-X7  
+
+- **Software environment:**  
+  Ardupilot GitHub master branch from Oct 08, 2021
+
+- **Report Author:** amilcarlucas  
+
+- **Report Time:** Oct 08, 2021  
+
+- **Ardupilot commit version:** Not mentioned  
+- **last commit before the reporting time:** 7424e0c
+
+---
+
+### **Steps for bug reproduction:**
+
+- **Step 1:** Execute the following in SITL (Software In The Loop):  
+  ```bash
+  sim_vehicle.py -N -v ArduCopter -f octa-quad-cwx -A --uartF=sim:fetteconewireesc --console --map
+  param set SERIAL5_PROTOCOL 38
+  param set SERVO_FTW_MASK 255
+  param set SIM_FTOWESC_ENA 1
+  reboot
+  watch ESC_TELEMETRY_1_TO_4 ESC_TELEMETRY_5_TO_8 ATTITUDE
+  ```  
+
+- **Step 2:** Confirm that MAVLink telemetry messages are visible on the MAVProxy console.  
+
+- **Step 3:** Start compassmot by executing:  
+  ```bash
+  compassmot
+  ```  
+
+- **Step 4:** Check telemetry messages and observe the behavior.
+
+---
+
+### **Observed behavior by the user:**
+- **Behavior after step 1:** MAVLink telemetry messages such as `ESC_TELEMETRY_*` and `ATTITUDE` are visible on the MAVProxy console.  
+- **Behavior after step 4:** MAVLink telemetry messages, except for `COMPASSMOT_STATUS` and `HEARTBEAT`, stop being transmitted.
+
+---
+
+### **Expected behavior:**
+
+- **Expected behavior 1:** MAVLink telemetry messages should continue to be transmitted during and after `compassmot` mode operation.  
+
+---
+
+### **Additional information provided by the user for bug investigation:**
+
+- **Actions taken by the user:**  
+  The user tested the issue both in SITL and on real hardware, using two ground control stations (GCS):  
+    1. MAVProxy connected via USB to a Pixhawk4  
+    2. QGroundControl connected to TELEM1 via RFD868x  
+
+  Upon initiating `compassmot` in MAVProxy, all MAVLink communication with QGroundControl ceased, except for `COMPASSMOT_STATUS` and `HEARTBEAT` messages.  
+
+- **URL of the flight log provided by the user:** Not provided.
+
+---
+
+### **Communication between developers or other personnel and the user:**
+
+- No further communication or suggestions are recorded in the provided document.  
+
+---

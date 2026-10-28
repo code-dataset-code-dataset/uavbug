@@ -1,0 +1,52 @@
+Here's the requested extraction for the bug report in the open-source flight control system software Ardupilot for drones:
+
+---
+
+**Environment where the bug occurred:**
+
+- **Hardware environment:** Not mentioned
+- **Software environment:** Simulation (SITL, Software In The Loop)
+- **Report Author:** rmackay9
+- **Report Time:** Apr 25, 2019
+- **Ardupilot commit version:** Not mentioned
+- **last commit before the reporting time:** ff1725b
+
+**Steps for bug reproduction:**
+
+- **Step 1:** Create a mission with a LOITER_TURNS command that does not specify latitude/longitude.
+- **Step 2:** Arm the vehicle in Loiter mode ("arm throttle").
+- **Step 3:** Switch to Auto mode and raise throttle ("AUTO", "rc 3 1100").
+- **Step 4:** Observe the vehicle moving to a point on the circle.
+- **Step 5:** Stop and restart the simulation, then repeat steps 1–4.
+- **Step 6:** Observe the vehicle moving to a different point on the circle during each retry.
+
+**Observed behavior by the user:**
+
+- **Behavior after step 1:** N/A
+- **Behavior after step 2:** N/A
+- **Behavior after step 3:** The vehicle begins to execute the LOITER_TURNS command.
+- **Behavior after step 4:** The vehicle moves to a seemingly random point on the circle radius during one run.
+- **Behavior after step 6:** Upon restarting the simulation and repeating the same steps, the vehicle moves to a different random point on the circle radius on subsequent runs.
+
+**Expected behavior:**
+
+- **Expected behavior 1:** The vehicle should move to a consistent start point on the circle radius during every run if latitude/longitude is not provided.
+- **Expected behavior 2:** The behavior should be deterministic, even when GPS coordinates are not specified in the LOITER_TURNS command.
+
+**Additional information provided by the user for bug investigation:**
+
+- **Actions taken by the user:** Steps for reproduction and identification of possible issue in `mode_auto.cpp` and the `AC_Circle` library.
+- **URL of the flight log provided by the user:** Not mentioned
+
+**Communication between developers or other personnel and the user:**
+
+- **Suggestion 1 provided by developers or other personnel:** Developer `rmackay9` suggested the problem originates in the `mode_auto.cpp` file's `do_circle` method, where the `AC_Circle` library's `init_start_angle(true)` is not being called when latitude/longitude is unspecified.
+- **Result of the operation after the user adopted suggestion 1:** Issue was not resolved, and further clarification was sought by another developer.
+- **Suggestion 2 provided by developers or other personnel:** Developer `brotherlymite` sought clarification from `rmackay9` if their understanding of the issue (inconsistent starting angles on the circle radius) was correct before attempting to fix it.
+- **Result of the operation after the user adopted suggestion 2:** N/A (no explicit resolution or fix attempt recorded).
+- **Suggestion 3 provided by developers or other personnel:** Developer `YuxinPan` informed the team in 2024 that the issue could no longer be reproduced as of ArduCopter 4.6-dev and suggested it might have been unknowingly fixed over the years.
+- **Result of the operation after the user adopted suggestion 3:** Developer `peterbarker` confirmed the issue was resolved based on `YuxinPan`’s testing and closed the issue.
+
+--- 
+
+This is the structured extraction of the information relating to the bug report on the ArduPilot software.

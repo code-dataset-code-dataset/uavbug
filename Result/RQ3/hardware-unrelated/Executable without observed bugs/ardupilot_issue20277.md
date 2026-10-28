@@ -1,0 +1,39 @@
+**Environment where the bug occurred:**
+
+- **Hardware environment:** SITL (Software In The Loop)
+- **Software environment:** ArduCopter
+- **Report Author:** rmackay9
+- **Report Time:** Mar 10, 2022
+- **Ardupilot commit version:** Not mentioned
+- **last commit before the reporting time:** 73006d9
+
+**Steps for bug reproduction:**
+
+- **Step 1:** Start SITL copter at the regular location.
+- **Step 2:** Create a short mission with a takeoff command followed by a waypoint command where both have altitude frames set to "AGL/Terrain".
+- **Step 3:** Execute `long MAV_CMD_DO_SET_HOME 0 0 0 0 -35.363 149.165 575` to set a home altitude.
+- **Step 4:** Use `param set AUTO_OPTIONS 3` to allow arming and taking off in Auto mode.
+- **Step 5:** Switch to Auto mode and arm the throttle.
+
+**Observed behavior by the user:**
+- **Behavior after step 5:** The Copter gets stuck and doesn't proceed to the waypoint command.
+
+**Expected behavior:**
+- **Expected behavior 1:** The Copter should take off and climb to the specified altitude.
+- **Expected behavior 2:** The Copter should proceed to the specified waypoint after reaching the target altitude.
+
+**Additional information provided by the user for bug investigation:**
+
+- **Actions taken by the user:**
+  - The issue was tested in SITL both at a regular location and in a hilly/mountainous environment to reproduce the behavior.
+  
+- **URL of the flight log provided by the user:** Not provided.
+
+**Communication between developers or other personnel and the user:**
+
+- **Suggestion 1 provided by developers or other personnel:** rmackay9 suggested that the issue might have been fixed by pull request `#20153` and asked for confirmation.
+- **Result of the operation after the user adopted suggestion 1:** User `Hasi123` confirmed the issue is resolved in the master branch after testing, marking it as fixed in SITL.
+  
+- **Suggestion 2 provided by developers or other personnel:** rmackay9 thanked user `Hasi123` for finding and testing the issue and suggested adding the fix to the next 4.1 release if possible.
+  
+- **Result of the operation after the user adopted suggestion 2:** User `Hasi123` agreed and confirmed the successful test result. They deemed the issue resolved and noted it could be closed.

@@ -1,0 +1,58 @@
+**Environment where the bug occurred:**
+
+- **Hardware environment:** Not explicitly mentioned
+- **Software environment:** Ardupilot (specific environment parameters loaded from "copter-vicon.parm" and "copter-optflow.parm")
+- **Report Author:** rmackay9
+- **Report Time:** Aug 01, 2024
+- **Ardupilot commit version:** Not mentioned
+- **last commit before the reporting time:** bc1c305
+
+**Steps for bug reproduction:**
+
+- **Step 1:** Start SITL.
+- **Step 2:** Execute `param load ../Tools/autotest/default_params/copter-vicon.parm`.
+- **Step 3:** Execute `param fetch` (repeat previous step and this step again).
+- **Step 4:** Execute `param load ../Tools/autotest/default_params/copter-optflow.parm`.
+- **Step 5:** Execute `param fetch` (repeat previous step and this step again).
+- **Step 6:** Set `param set SIM_VICON_YAW 90`.
+- **Step 7:** Set `param set EK3_SRC1_POSXY 6`.
+- **Step 8:** Set `param set EK3_SRC1_POSZ 6`.
+- **Step 9:** Set `param set EK3_SRC1_VELXY 6`.
+- **Step 10:** Set `param set EK3_SRC1_VELZ 6`.
+- **Step 11:** Set `param set EK3_SRC1_YAW 6`.
+- **Step 12:** Set `param set EK3_SRC2_POSXY 0`.
+- **Step 13:** Set `param set EK3_SRC2_POSZ 1`.
+- **Step 14:** Set `param set EK3_SRC2_VELXY 5`.
+- **Step 15:** Set `param set EK3_SRC2_VELZ 0`.
+- **Step 16:** Set `param set EK3_SRC2_YAW 0`.
+- **Step 17:** Set `param set RC9_OPTION 90`.
+- **Step 18:** Set `param set GPS1_TYPE 1`.
+- **Step 19:** Exit SITL.
+- **Step 20:** Run `../Tools/autotest/sim_vehicle.py --map --console -A "--serial5=sim:vicon:"`.
+- **Step 21:** Fly the vehicle in Guided mode using External Nav (`rc 9 1000`).
+- **Step 22:** Arm throttle and take off to 15m.
+- **Step 23:** Right-mouse-button-click west of the vehicle on the map and select "Fly To Here" at 15m.
+- **Step 24:** Use optical flow (`rc 9 1500`).
+- **Step 25:** Right-mouse-button-click north of the vehicle on the map and select "Fly To Here" at 15m.
+- **Step 26:** Switch back to external nav (`rc 9 1000`).
+
+**Observed behavior by the user:**
+
+- **Behavior after Step 26:** The vehicle momentarily appears where the GPS reports its location to be and then moves violently back to its correct location.
+
+**Expected behavior:**
+
+- **Expected behavior 1:** Switching position sources between OpticalFlow and External Navigation should not result in a large position jump.
+- **Expected behavior 2:** The position should remain aligned with the active EKF source set, avoiding GPS interference since it is not defined in any EK3_SRCx_ parameters.
+
+**Additional information provided by the user for bug investigation:**
+
+- **Actions taken by the user:** SITL testing with debug messages added to `NavEKF3_core::ResetPosition()` to determine the position source used for resets.
+- **URL of the flight log provided by the user:** Not mentioned
+
+**Communication between developers or other personnel and the user:**
+
+- **Suggestion 1 provided by developers or other personnel:** Developer `peterbarker` mentioned the issue could be related to issue #16046.
+- **Result of the operation after the user adopted suggestion 1:** Not mentioned.
+- **Suggestion 2 provided by developers or other personnel:** Developer `rmackay9` indicated on Nov 26, 2024, that the issue was largely resolved but mentioned potential similar problems, such as EKF resets to inactive sensor positions during lane switches.
+- **Result of the operation after the user adopted suggestion 2:** The issue was closed, but `rmackay9` noted plans for future investigations into similar inconsistencies.

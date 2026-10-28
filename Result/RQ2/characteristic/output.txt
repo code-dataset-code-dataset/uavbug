@@ -1,0 +1,99 @@
+Author Followers:
+0 类中位数: 119.0
+1 类中位数: 7.0
+    0 组样本数: 210
+    1 组样本数: 224
+    Mann-Whitney U 统计量: 13279.5000
+    P 值: 3.815531159594547e-15
+    Cliff's Delta: -0.4354 (medium)
+
+Author Repositories:
+0 类中位数: 42.0
+1 类中位数: 11.5
+    0 组样本数: 210
+    1 组样本数: 224
+    Mann-Whitney U 统计量: 14118.5000
+    P 值: 5.432524962667252e-13
+    Cliff's Delta: -0.3997 (medium)
+
+Author Stars:
+0 类中位数: 42.0
+1 类中位数: 5.0
+    0 组样本数: 210
+    1 组样本数: 224
+    Mann-Whitney U 统计量: 15901.5000
+    P 值: 4.125517282894708e-09
+    Cliff's Delta: -0.3239 (small)
+
+Author Registration time:
+0 类中位数: 3498.1002256944435
+1 类中位数: 3347.690046296296
+    0 组样本数: 210
+    1 组样本数: 224
+    Mann-Whitney U 统计量: 21693.0000
+    P 值: 0.16189577616584572
+    Cliff's Delta: -0.0777 (negligible)
+
+Total Contributions:
+0 类中位数: 4878.0
+1 类中位数: 375.0
+    0 组样本数: 209
+    1 组样本数: 222
+    Mann-Whitney U 统计量: 14293.5000
+    P 值: 5.152859988077872e-12
+    Cliff's Delta: -0.3839 (medium)
+
+Total Contributions Before the Issue:
+0 类中位数: 1138.0
+1 类中位数: 149.0
+    0 组样本数: 209
+    1 组样本数: 222
+    Mann-Whitney U 统计量: 15054.0000
+    P 值: 2.940749377276829e-10
+    Cliff's Delta: -0.3511 (medium)
+
+Contributions Within 1 Year Before Submitting the Issue:
+0 类中位数: 751.0
+1 类中位数: 36.0
+    0 组样本数: 209
+    1 组样本数: 222
+    Mann-Whitney U 统计量: 14176.5000
+    P 值: 2.9276252563715746e-12
+    Cliff's Delta: -0.3889 (medium)
+
+Contributions Before Submitting the Issue In the Repository:
+0 类中位数: 65.5
+1 类中位数: 0.0
+    0 组样本数: 210
+    1 组样本数: 224
+    Mann-Whitney U 统计量: 13758.0000
+    P 值: 1.0430957787163609e-14
+    Cliff's Delta: -0.4151 (medium)
+
+Total Contributions In the Repository:
+0 类中位数: 208.0
+1 类中位数: 1.0
+    0 组样本数: 210
+    1 组样本数: 224
+    Mann-Whitney U 统计量: 13572.5000
+    P 值: 8.958871074346611e-15
+    Cliff's Delta: -0.4229 (medium)
+
+Previous Frequency(all):
+0 类中位数: 2.0
+1 类中位数: 0.0
+    0 组样本数: 210
+    1 组样本数: 224
+    Mann-Whitney U 统计量: 17601.5000
+    P 值: 1.7629070915219215e-06
+    Cliff's Delta: -0.2516 (small)
+
+Steps:
+0 类中位数: 4.0
+1 类中位数: 4.0
+    0 组样本数: 210
+    1 组样本数: 224
+    Mann-Whitney U 统计量: 24789.5000
+    P 值: 0.32266985943292137
+    Cliff's Delta: 0.0540 (negligible)
+

@@ -1,0 +1,56 @@
+**Environment where the bug occurred:**
+
+- **Hardware environment:** Not explicitly mentioned  
+- **Software environment:** ArduPilot Autopilot; specific commit version: **not mentioned**  
+- **Report Author:** rmackay9  
+- **Report Time:** May 12, 2020  
+- **Ardupilot commit version:** Not mentioned  
+- **last commit before the reporting time:** 2ce5f0f
+
+**Steps for bug reproduction:**
+
+- **Step 1:** Enable EKF3 (EKF3 is suggested for Beacons).
+- **Step 2:** Set the following parameters in the software:  
+  - `param set EK3_ENABLE 1`  
+  - `param set EK2_ENABLE 0`  
+  - `AHRS_EKF_TYPE 3`  
+  - `param set EK3_GPS_TYPE 3`  
+  - `param set GPS_TYPE 0`  
+  - `param set BCN_TYPE 10`  
+  - `param set BCN_LATITUDE -35.363261`  
+  - `param set BCN_LONGITUDE 149.165230`  
+  - `param set BCN_ALT 584`  
+  - `param set BCN_ORIENT_YAW 45`  
+- **Step 3:** Start SITL (Software In The Loop). Observe the behavior, considering whether the vehicle appears at the map origin.
+- **Step 4:** If the vehicle doesn't appear, right-mouse-click in MAVProxy and choose "Set Origin (with Altitude)." Observe the vehicle’s map movements.
+
+**Observed behavior by the user:**
+
+- **Behavior after step 1:** N/A
+- **Behavior after step 2:** The EKF origin is not automatically set (the user has to right-click to manually set it).  
+- **Behavior after step 3:** The vehicle does not appear on the map unless a manual origin is set.  
+- **Behavior after step 4:** The vehicle appears on the map but moves wildly during SITL tests.  <font color='red'>即使设置了origin，MAP上无人机仍然不出现</font>
+
+**Expected behavior:**
+
+- **Expected behavior 1:** The EKF origin should be automatically set without the need for manual input by the user.  
+- **Expected behavior 2:** The vehicle should appear in a stable manner on the map and not move wildly.
+
+**Additional information provided by the user for bug investigation:**
+
+- **Actions taken by the user:** Suggested confirming `AP_Beacon_SITL` distance calculations and ensuring values correctly propagate into EKF3.  
+- **URL of the flight log provided by the user:** Not mentioned  
+
+**Communication between developers or other personnel and the user:**
+
+- **Suggestion 1 provided by developers or other personnel:**  
+  - Peter Barker (`peterbarker`) suggested confirming if the `tlog` gets a `GLOBAL_POSITION_ORIGIN` message before setting the manual origin.  
+  - He also noted that wild vehicle movement during SITL tests might be related to yaw misconfiguration.  
+- **Result of the operation after the user adopted suggestion 1:**  
+  - The default yaw (`yaw-0`) was confirmed to provide the correct pattern, whereas `yaw-45` or `yaw-180` produced issues.
+- **Suggestion 2 provided by developers or other personnel:**  
+  - Developer rmackay9 suggested ignoring beacons when very close and investigating how beacon positions in a planar configuration impact altitude calculations.  
+- **Result of the operation after the user adopted suggestion 2:**  
+  - Issues were identified and patched in the master branch.  
+
+- **Resolution:** Fixed with subsequent updates; issue marked as closed on August 31, 2020.  

@@ -1,0 +1,36 @@
+**Environment where the bug occurred:**
+
+- **Hardware environment:** SITL (Software-In-The-Loop) with a Copter.
+- **Software environment:** Ardupilot, commit version not mentioned.
+- **Report Author:** rmackay9
+- **Report Time:** Apr 15, 2024
+- **Ardupilot commit version:** Not mentioned.
+- **last commit before the reporting time:** cd9aa0e
+
+**Steps for bug reproduction:**
+
+- **Step 1:** Start SITL with a Copter (though the bug applies to all vehicles).
+- **Step 2:** Add a square mission with a `DO_JUMP` command, starting with a "Repeat" value of 6.
+- **Step 3:** Fly the mission and note the text output to the user as each `DO_JUMP` command is passed.
+- **Step 4:** Change the `DO_JUMP` command's "Repeat" field to -1.
+- **Step 5:** Fly the mission again and observe that no text is displayed to the user as the `DO_JUMP` commands are passed.
+
+**Observed behavior by the user:**
+
+- **Behavior after step 3:** Text is output to the user as the `DO_JUMP` commands are passed when the field value is 6.
+- **Behavior after step 5:** No text is output to the user as the `DO_JUMP` commands are passed when the field value is -1.
+
+**Expected behavior:**
+- **Expected behavior 1:** Text should be displayed to the user for every `DO_JUMP` command, regardless of the "Repeat" field value.
+
+**Additional information provided by the user for bug investigation:**
+
+- **Actions taken by the user:**
+  - Tested the behavior using SITL in the Copter simulation.
+  - Investigated the bug's potential source in the `AP_Mission::start_command()` function, where text is sent. The user noted that they were surprised this function was being called for `DO_JUMP` commands, as they believed these commands would be transparent to vehicle code.
+- **URL of the flight log provided by the user:** Not mentioned.
+
+**Communication between developers or other personnel and the user:**
+
+- **Suggestion 1 provided by developers or other personnel:** N/A (No developer suggestions mentioned in this report).
+- **Result of the operation after the user adopted suggestion 1:** N/A (No operation results mentioned).

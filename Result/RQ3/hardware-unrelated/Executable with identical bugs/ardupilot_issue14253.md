@@ -1,0 +1,59 @@
+Here's the requested output based on the markdown document provided:
+
+---
+
+**Environment where the bug occurred:**
+
+- **Hardware environment:** SITL (Software In The Loop Simulation)
+- **Software environment:** Ardupilot
+- **Report Time:** May 01, 2020
+- **Ardupilot commit version:** Not mentioned
+- **last commit before the reporting time:** d16f317
+
+**Steps for bug reproduction:**
+
+- **Step 1:** Set all parameters to defaults (i.e., `rm eeprom.bin`).
+- **Step 2:** Start `sim_vehicle` from the `copter` directory (`cd ArduCopter; ../Tools/autotest/sim_vehicle.py --map --console`).
+- **Step 3:** Arm the throttle.
+- **Step 4:** Execute command `rc 3 1800` (to climb to 10m).
+- **Step 5:** Execute command `rc 3 1500` (to stop climbing).
+- **Step 6:** Execute command `rc 2 1200` (to start the vehicle flying forward).
+- **Step 7:** Execute command `param set SIM_GPS_GLITCH_Y 0.0001`.
+
+**Observed behavior by the user:**
+
+- **Behavior after step 1:** Parameters are reset to defaults.
+- **Behavior after step 2:** The simulation starts with map and console.
+- **Behavior after step 3:** The vehicle arms the throttle.
+- **Behavior after step 4:** The vehicle starts climbing to 10m.
+- **Behavior after step 5:** The vehicle stops climbing.
+- **Behavior after step 6:** The vehicle starts flying forward.
+- **Behavior after step 7:** A GPS glitch causes an emergency yaw reset, leading the vehicle to stop using the compass.
+
+**Expected behavior:**
+
+- **Expected behavior 1:** The GPS glitch should not trigger an emergency yaw reset.
+- **Expected behavior 2:** The vehicle should continue using the compass.
+
+**Additional information provided by the user for bug investigation:**
+
+- **Actions taken by the user:** The user (`rmackay9`) conducted SITL testing, recreated the issue, and shared detailed steps to reproduce the problem.
+- **URL of the flight log provided by the user:** Not mentioned.
+
+**Communication between developers or other personnel and the user:**
+
+- **Suggestion 1 provided by developers or other personnel:** Developer `peterbarker` suggested testing using vibrations (`mode loiter`, `param set SIM_ACC_RND 200`, `arm throttle`, `rc 3 2000`).
+  
+    - **Result of the operation after the user adopted suggestion 1:** It's unclear whether the user tested vibration, but `peterbarker` noted 20m/s² acceleration wasn’t healthy while questioning the disabling of magnetometers.
+
+- **Suggestion 2 provided by developers or other personnel:** Developer `priseborough` suggested adding a check for sensor failure modes to inhibit the yaw reset when failures are not caused by bad yaw. He also suggested limiting yaw resets to the first 30 seconds after takeoff.
+  
+    - **Result of the operation after the user adopted suggestion 2:** Developer `priseborough` updated that they removed the internal trigger mechanism, verified no yaw resets for GPS position jumps or IMU clipping in both EKF2 and EKF3, and noted a lane switch issue in EKF3 during large GPS glitches. A PR (pull request) was submitted for fixes.
+
+- **Suggestion 3 provided by developers or other personnel:** Developer `tridge` discovered related issues with `EK3_MAG_CAL=5` and GPS yaw, found the breaking commit (`863f989`), and submitted a fix (#14266).
+
+    - **Result of the operation after the user adopted suggestion 3:** Developer `priseborough` confirmed fixes for simulated GPS jumps, IMU clipping, and flyaways induced by certain parameter settings. Additional fixes were provided in PR #14275.
+
+--- 
+
+
